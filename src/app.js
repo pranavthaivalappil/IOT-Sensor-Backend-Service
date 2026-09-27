@@ -63,6 +63,9 @@ const start = async () => {
     process.on("SIGTERM", () => shutdown("SIGTERM"));
 };
 
-start();
+// Only auto-start when run directly (node app.js), NOT when imported by tests
+if (require.main === module) {
+    start();
+}
 
-module.exports = app; // exported for tests
+module.exports = app;
